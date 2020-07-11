@@ -5,7 +5,7 @@
 - pipenv shell
 - pipenv install flask flask_cors
 - create main.py
-  - reference https://github.com/testdrivenio/flask-vue-crud
+  - ref https://github.com/testdrivenio/flask-vue-crud
 
 ### create client files
 
@@ -15,3 +15,7 @@
 - yarn dev
   - (for production) yarn build, yarn start
 - yarn add @nuxtjs/axios
+- edit nuxt.config.js
+  - ref https://axios.nuxtjs.org/setup.html#install
+- implement Read of CRUD
+  - ref my other repositor, portfolio, vue-go-gae

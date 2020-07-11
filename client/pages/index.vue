@@ -5,9 +5,33 @@
       <h1 class="title">
         matching-app-web
       </h1>
-      <p>v-for="(book, index) in books" :key="index">{{ book }}</p>
-      <button @click="getBooks">get books</button>
-      <p>{{ books_tmp }}</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>isRead</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(book, index) in books" :key="index">
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>
+              <span v-if="book.read">Yes</span>
+              <span v-else>No</span>
+            </td>
+            <td>
+              <div>
+                <button>Update</button>
+                <button>Delete</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
       <!-- <div class="links">
         <a
           href="https://nuxtjs.org/"
@@ -36,17 +60,20 @@ import axios from "axios";
 export default {
   data() {
     return {
-      books: ["hello", "hi"],
-      books_tmp: "",
+      // books: ["hello", "hi"],
+      books: [],
       api_url: "http://localhost:5000"
     };
   },
   methods: {
     getBooks: async function() {
       let res = await axios.get(this.api_url + "/books");
-      console.log(res.data);
-      this.books_tmp = res.data;
+      console.log(res.data.books);
+      this.books = res.data.books;
     }
+  },
+  created: function() {
+    this.getBooks();
   }
 };
 </script>
