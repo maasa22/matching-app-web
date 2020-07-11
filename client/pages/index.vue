@@ -1,11 +1,14 @@
 <template>
   <div class="container">
     <div>
-      <Logo />
+      <!-- <Logo /> -->
       <h1 class="title">
         matching-app-web
       </h1>
-      <div class="links">
+      <p>v-for="(book, index) in books" :key="index">{{ book }}</p>
+      <button @click="getBooks">get books</button>
+      <p>{{ books_tmp }}</p>
+      <!-- <div class="links">
         <a
           href="https://nuxtjs.org/"
           target="_blank"
@@ -22,13 +25,30 @@
         >
           GitHub
         </a>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      books: ["hello", "hi"],
+      books_tmp: "",
+      api_url: "http://localhost:5000"
+    };
+  },
+  methods: {
+    getBooks: async function() {
+      let res = await axios.get(this.api_url + "/books");
+      console.log(res.data);
+      this.books_tmp = res.data;
+    }
+  }
+};
 </script>
 
 <style>
@@ -42,16 +62,8 @@ export default {}
 }
 
 .title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
+  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   display: block;
   font-weight: 300;
   font-size: 100px;
@@ -67,7 +79,7 @@ export default {}
   padding-bottom: 15px;
 }
 
-.links {
+/* .links {
   padding-top: 15px;
-}
+} */
 </style>
