@@ -1,4 +1,4 @@
-### create server file
+### create server files
 
 - mkdir server
 - cd server
@@ -18,4 +18,12 @@
 - edit nuxt.config.js
   - ref https://axios.nuxtjs.org/setup.html#install
 - implement Read of CRUD
-  - ref my other repositor, portfolio, vue-go-gae
+  - ref my repositories, portfolio, vue-go-gae
+
+### set up a db
+
+- create a db with TablePlus
+  - with user=postgres <- postgres に user 登録するやり方よく分からんが?
+- pipenv install psycopg2-binary
+  - ref my repository, line-bot-lunch2
+- create a python script for creating a db

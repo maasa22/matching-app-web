@@ -6,7 +6,7 @@
 - nuxt hello world
   -------------done-------------
 - add db to flask
-- deploy
+- once deploy to gae
 
 ### dev
 
