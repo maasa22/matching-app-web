@@ -13,18 +13,19 @@ host_db = config.host_db
 port_db = config.port_db
 database = config.database
 
-class User:
-    def __init__(self,id_user,gender,password,mail,birthday,display_name,self_images,self_introduction,favorites,last_login):
-        self.id_user = id_user
-        self.gender = gender
-        self.password = password
-        self.mail = mail
-        self.birthday = birthday
-        self.display_name = display_name
-        self.self_images = self_images
-        self.self_introduction = self_introduction
-        self.favorites = favorites
-        self.last_login = last_login
+# class User:
+#     def __init__(self,id_user,gender,password,mail,birthday,display_name,self_images,self_introduction,favorites,last_login):
+#         self.id_user = id_user
+#         self.gender = gender
+#         self.password = password
+#         self.mail = mail
+#         self.birthday = birthday
+#         self.display_name = display_name
+#         self.self_images = self_images
+#         self.self_introduction = self_introduction
+#         self.favorites = favorites
+#         self.last_login = last_login
+
 
 BOOKS = [
     {
@@ -75,7 +76,7 @@ def ping_pong():
 def default_image(filename):
     return send_from_directory("./static", filename)
 
-@app.route("/users_f", methods=['GET'])
+@app.route("/users_m", methods=['GET'])
 def male_users():
     conn = psycopg2.connect("postgresql://{}:{}@{}:{}/{}".format(user_db, password_db, host_db, port_db, database))
     cur = conn.cursor()

@@ -31,3 +31,4 @@
 ### misc
 
 - create pages
+- create an outline of a search page

@@ -1,3 +1,5 @@
+### insert_dummy_data.pyに合わせて修正する。
+
 import config
 import psycopg2
 
@@ -17,6 +19,7 @@ cur.execute('''CREATE TABLE user_web \
                 mail text, \
                 birthday date, \
                 display_name text, \
+                self_status_message text, \
                 self_images text, \
                 self_introduction text, \
                 favorites numeric, \

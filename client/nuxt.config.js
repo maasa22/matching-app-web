@@ -47,7 +47,7 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ["@nuxtjs/axios"],
+  modules: ["@nuxtjs/axios", "bootstrap-vue/nuxt"],
   axios: {
     // proxyHeaders: false
   },
