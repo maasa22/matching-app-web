@@ -9,7 +9,6 @@ verify_ssl = true
 flask = "*"
 flask-cors = "*"
 psycopy2-binary = "*"
-pandas = "*"
 
 [requires]
 python_version = "3.7"

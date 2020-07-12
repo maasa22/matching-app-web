@@ -9,30 +9,18 @@ database = config.database
 
 conn = psycopg2.connect("postgresql://{}:{}@{}:{}/{}".format(user, password, host, port_db, database))
 cur = conn.cursor()
-cur.execute("DROP TABLE IF EXISTS user_m")
-cur.execute('''CREATE TABLE user_m \
-                (id_user_M text, \
+cur.execute("DROP TABLE IF EXISTS user_web")
+cur.execute('''CREATE TABLE user_web \
+                (id_user text, \
+                gender text, \
                 password text,\
                 mail text, \
-                birthday text, \
+                birthday date, \
                 display_name text, \
                 self_images text, \
                 self_introduction text, \
-                favorites text, \
-                last_login text \
-                )''')
-
-cur.execute("DROP TABLE IF EXISTS user_f")
-cur.execute('''CREATE TABLE user_f \
-                (id_user_f text, \
-                password text,\
-                mail text, \
-                birthday text, \
-                display_name text, \
-                self_images text, \
-                self_introduction text, \
-                favorites text, \
-                last_login text \
+                favorites numeric, \
+                last_login timestamp \
                 )''')
 
 cur.execute("DROP TABLE IF EXISTS chat")

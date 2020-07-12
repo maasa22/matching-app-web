@@ -1,8 +1,30 @@
 import uuid
-
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from flask import send_from_directory
+import pandas as pd
+import config
+import psycopg2
+import json
 
+user_db = config.user_db
+password_db = config.password_db
+host_db = config.host_db
+port_db = config.port_db
+database = config.database
+
+class User:
+    def __init__(self,id_user,gender,password,mail,birthday,display_name,self_images,self_introduction,favorites,last_login):
+        self.id_user = id_user
+        self.gender = gender
+        self.password = password
+        self.mail = mail
+        self.birthday = birthday
+        self.display_name = display_name
+        self.self_images = self_images
+        self.self_introduction = self_introduction
+        self.favorites = favorites
+        self.last_login = last_login
 
 BOOKS = [
     {
@@ -48,6 +70,20 @@ def remove_book(book_id):
 @app.route('/ping', methods=['GET'])
 def ping_pong():
     return jsonify('pong!')
+
+@app.route("/static/<filename>")
+def default_image(filename):
+    return send_from_directory("./static", filename)
+
+@app.route("/users_f", methods=['GET'])
+def male_users():
+    conn = psycopg2.connect("postgresql://{}:{}@{}:{}/{}".format(user_db, password_db, host_db, port_db, database))
+    cur = conn.cursor()
+    df = pd.read_sql("SELECT * FROM user_web WHERE gender = 'male'", con=conn)
+    # users = []
+    # for record in json.loads(df.to_json(orient="records")):
+    #     users.append(User(**record))
+    return df.to_json(orient="records")
 
 
 @app.route('/books', methods=['GET', 'POST'])
