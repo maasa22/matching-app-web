@@ -51,5 +51,10 @@ cur.execute('''CREATE TABLE favorites \
                 receiver_id text \
                 )''')
 
+# - matches(batch)
+#   - id_matches
+#   - user_M
+#   - user_F
+
 conn.commit()
 conn.close()

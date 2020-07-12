@@ -20,7 +20,7 @@
 - secure sql
 - secure db, api
 
-### phase2
+### phase2,3,4
 
 - pivot
 - swift
@@ -28,36 +28,3 @@
 - misc
   - firebase
   - typescript
-
-## memo
-
-### db
-
-- user_M
-  - id_user_M \*
-  - password \*
-  - mail
-  - birthday
-  - display_name
-  - self_image
-  - self_introduction \*
-  - favorites(batch)
-  - last_login(batch)
-- chat
-  - id_chat
-  - text
-    - include emoji
-  - time
-  - sender
-  - receiver
-- user_F
-  - skip
-- favorites
-  - id_favorites
-  - time
-  - sender
-  - reveiver
-- matches(batch)
-  - id_matches
-  - user_M
-  - user_F

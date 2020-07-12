@@ -27,3 +27,7 @@
 - pipenv install psycopg2-binary
   - ref my repository, line-bot-lunch2
 - create a python script for creating a db
+
+### misc
+
+- create pages
