@@ -9,7 +9,8 @@
         fluid
         alt="Responsive image"
       ></b-img>
-      <p>{{ userProfile.favorites }} いいね</p>
+      <p class="box">{{ userProfile.favorites }} いいね</p>
+      <b-button class="box" style="float:right"> いいね</b-button>
       <h5>つぶやき</h5>
       <p>{{ userProfile.self_status_message }}</p>
       <h5>自己紹介</h5>

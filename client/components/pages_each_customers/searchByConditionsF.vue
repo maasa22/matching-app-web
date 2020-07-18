@@ -5,18 +5,25 @@
     </nuxt-link>
     <p></p>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <nuxt-link :to="{ path: 'search' }">
-        <b-button type="submit" variant="primary"
-          >この条件で検索</b-button
-        ></nuxt-link
+      <nuxt-link
+        :to="{
+          path: 'search',
+          query: {
+            age_min: form.age_min,
+            age_max: form.age_max,
+            prefectures: form.prefectures
+          }
+        }"
       >
+        <b-button type="submit" variant="primary">この条件で検索</b-button>
+      </nuxt-link>
       <!-- どうやって　search_fに結果を受け渡せるのだろうか。       -->
       <b-button type="reset" variant="danger">すべてリセット</b-button>
       <b-form-group id="input-group-3" label="都道府県:" label-for="input-3">
         <b-form-checkbox-group
           id="input-3"
-          v-model="form.prefecture"
-          :options="prefectures"
+          v-model="form.prefectures"
+          :options="prefectures_option"
           name="flavour-1"
         ></b-form-checkbox-group>
       </b-form-group>
@@ -36,9 +43,9 @@
         ></b-form-select>
       </b-form-group>
     </b-form>
-    <b-card class="mt-3" header="Form Data Result">
+    <!-- <b-card class="mt-3" header="Form Data Result">
       <pre class="m-0">{{ form }}</pre>
-    </b-card>
+    </b-card> -->
   </div>
 </template>
 <style scoped>
@@ -56,11 +63,11 @@ export default {
     return {
       api_url: "http://localhost:5000",
       form: {
-        prefecture: null,
+        prefectures: null,
         age_min: 17,
         age_max: 31
       },
-      prefectures: [
+      prefectures_option: [
         // { text: "Select One", value: null },
         "北海道",
         "青森県",
@@ -109,27 +116,25 @@ export default {
   },
   methods: {
     async onSubmit(evt) {
-      evt.preventDefault();
-      // alert(JSON.stringify(this.form));
-      // console.log(this.form);
-      console.log(this.form.age_min);
-      console.log(this.form.prefecture);
-      let res = await axios.get(this.api_url + "/user_by_conditions", {
-        params: {
-          age_min: this.form.age_min,
-          age_max: this.form.age_max,
-          prefecture: this.form.prefecture
-        }
-      });
-      console.log(res.data);
-      //flaskへ。api/user_by_conditions
+      // evt.preventDefault();
+      // // alert(JSON.stringify(this.form));
+      // // console.log(this.form);
+      // let res = await axios.get(this.api_url + "/user_by_conditions", {
+      //   params: {
+      //     age_min: this.form.age_min,
+      //     age_max: this.form.age_max,
+      //     prefectures: this.form.prefectures
+      //   }
+      // });
+      // console.log(res.data);
+      // //flaskへ。api/user_by_conditions
     },
     onReset(evt) {
       evt.preventDefault();
       // Reset our form values
       this.form.age_min = 18;
       this.form.age_max = 30;
-      this.form.prefecture = null;
+      this.form.prefectures = null;
       // Trick to reset/clear native browser form validation state
       this.show = false;
       this.$nextTick(() => {

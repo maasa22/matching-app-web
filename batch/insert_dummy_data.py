@@ -69,7 +69,7 @@ for i in range(5):
         'hoge',\
         'hoge@hoge',\
         datetime.date(1994, 11, 18),\
-        '東京都', \
+        '埼玉県', \
         'ナオキ',\
         'よろしくお願いします',\
         'http://localhost:5000/static/image/test.png',\
