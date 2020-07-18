@@ -100,7 +100,7 @@ def user_by_conditions():
     response_object = {'status': 'success'}
     age_min = request.args.get('age_min')
     age_max = request.args.get('age_max')
-    prefectures = request.args.getlist('prefecture[]')
+    prefectures = request.args.getlist('prefectures[]')
     conn = psycopg2.connect("postgresql://{}:{}@{}:{}/{}".format(user_db, password_db, host_db, port_db, database))
     cur = conn.cursor()
     if len(prefectures) >= 1:
