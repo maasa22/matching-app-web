@@ -62,7 +62,8 @@ export default {
     return {
       // books: ["hello", "hi"],
       books: [],
-      api_url: "http://localhost:5000"
+      api_url: process.env.BASE_URL
+      // api_url: "http://localhost:5000"
     };
   },
   methods: {

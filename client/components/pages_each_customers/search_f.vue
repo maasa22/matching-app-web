@@ -52,7 +52,8 @@ export default {
     return {
       users_male: [],
       users_male_rows: [],
-      api_url: "http://localhost:5000",
+      // api_url: "http://localhost:5000",
+      api_url: process.env.BASE_URL,
       num_of_users: 0,
       age_min_local: 10,
       age_max_local: 30

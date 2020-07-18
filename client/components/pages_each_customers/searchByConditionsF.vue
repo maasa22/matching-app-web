@@ -61,7 +61,6 @@ import axios from "axios";
 export default {
   data() {
     return {
-      api_url: "http://localhost:5000",
       form: {
         prefectures: null,
         age_min: 17,
@@ -115,25 +114,12 @@ export default {
     };
   },
   methods: {
-    async onSubmit(evt) {
-      // evt.preventDefault();
-      // // alert(JSON.stringify(this.form));
-      // // console.log(this.form);
-      // let res = await axios.get(this.api_url + "/user_by_conditions", {
-      //   params: {
-      //     age_min: this.form.age_min,
-      //     age_max: this.form.age_max,
-      //     prefectures: this.form.prefectures
-      //   }
-      // });
-      // console.log(res.data);
-      // //flaskへ。api/user_by_conditions
-    },
+    async onSubmit(evt) {},
     onReset(evt) {
       evt.preventDefault();
       // Reset our form values
-      this.form.age_min = 18;
-      this.form.age_max = 30;
+      this.form.age_min = 17;
+      this.form.age_max = 31;
       this.form.prefectures = null;
       // Trick to reset/clear native browser form validation state
       this.show = false;
