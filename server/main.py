@@ -109,9 +109,9 @@ def user_by_conditions():
             prefectures_str += "'" + prefectures[i] + "', "
             if i == len(prefectures) - 1:
                 prefectures_str += "'" + prefectures[i] + "')"
-        df = pd.read_sql("SELECT * FROM user_web WHERE age > '{}' and age < '{}' and prefecture in {}".format(age_min, age_max, prefectures_str),  con=conn)
+        df = pd.read_sql("SELECT * FROM user_web WHERE age >= '{}' and age <= '{}' and prefecture in {}".format(age_min, age_max, prefectures_str),  con=conn)
     else:
-        df = pd.read_sql("SELECT * FROM user_web WHERE age > '{}' and age < '{}'".format(age_min, age_max),  con=conn)
+        df = pd.read_sql("SELECT * FROM user_web WHERE age >= '{}' and age <= '{}'".format(age_min, age_max),  con=conn)
     return df.to_json(orient="records")
 
 @app.route('/books', methods=['GET', 'POST'])

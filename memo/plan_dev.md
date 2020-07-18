@@ -10,7 +10,10 @@
 
 ### dev
 
-- create women's UI
+- create women's search page
+  -------------done-------------
+- create women's profile page
+- create women's chat page
 - implement image upload
 - create APIs
 - implement login\*
