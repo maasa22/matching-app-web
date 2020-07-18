@@ -53,7 +53,9 @@ export default {
       users_male: [],
       users_male_rows: [],
       api_url: "http://localhost:5000",
-      num_of_users: 0
+      num_of_users: 0,
+      age_min_local: 10,
+      age_max_local: 30
       // age_min: this.age_min,
       // age_max: this.age_max,
       // prefectures: this.prefectures
@@ -64,17 +66,21 @@ export default {
       // let res = await axios.get(this.api_url + "/users_m");
       // console.log(this.age_min, this.age_max, this.prefectures);
       if (this.age_min === undefined) {
-        this.age_min = 17;
+        this.age_min_local = 17;
+      } else {
+        this.age_min_local = this.age_min;
       }
       if (this.age_max === undefined) {
-        this.age_max = 31;
+        this.age_max_local = 31;
+      } else {
+        this.age_max_local = this.age_max;
       }
       // prefecturesはnullで良いや。flaskのif文でnullの処理する。
 
       let res = await axios.get(this.api_url + "/user_by_conditions", {
         params: {
-          age_min: this.age_min,
-          age_max: this.age_max,
+          age_min: this.age_min_local,
+          age_max: this.age_max_local,
           prefectures: this.prefectures
         }
       });

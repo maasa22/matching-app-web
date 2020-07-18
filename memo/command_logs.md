@@ -37,3 +37,8 @@
   - vuetify didn't work
 - create an outline of a search page
 - createa each-user pages
+- implement search by user_conditions(age, prefecture,,,)
+  - ref https://www.thepolyglotdeveloper.com/2017/11/pass-data-between-routes-vuejs-web-application/
+  - nuxt-link、params でやり取りができなかったが query でやり取りはできた。謎。
+  - 最悪、ページ間のデータのやり取りが難しいいなら、:show で見えるか見えないかを制御して 1 ファイルにしてしまうのもあり。
+  - 検索条件は、毎回リセットされると不便なので、db に入れちゃった方が良い説はある。
