@@ -31,4 +31,9 @@
 ### misc
 
 - create pages
+- install bootstrap-vue
+  - yarn add bootstrap-vue
+  - edit nuxt.cinfig.js, modules: ['bootstrap-vue/nuxt']
+  - vuetify didn't work
 - create an outline of a search page
+- createa each-user pages

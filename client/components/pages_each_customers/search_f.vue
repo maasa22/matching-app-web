@@ -1,31 +1,36 @@
 <template>
   <div class="container">
     <h1>さがす</h1>
-    <p><u>12345</u>人</p>
-    <p><u>(右に検索アイコン)</u></p>
+    <p>12345 人</p>
+    <p>(右に検索アイコン)</p>
     <div class="row">
       <div
         v-for="(user_male, index) in users_male"
         :key="index"
         class="col-md-3 col-6 my-1"
       >
-        <b-card
-          :title="user_male.display_name"
-          :img-src="user_male.self_images"
-          img-alt="Image"
-          img-top
-          tag="article"
-          style="max-width: 20rem;"
-          class="mb-2 h-100"
+        <nuxt-link
+          @click.native="gotoUserPage"
+          :to="{ path: 'user/' + user_male.id_user }"
         >
-          <b-card-text>
-            {{ user_male.age }}歳, {{ user_male.prefecture }}<br />
-            {{ user_male.self_status_message }} <br />
-            <!-- <hr />
+          <b-card
+            :title="user_male.display_name"
+            :img-src="user_male.self_images"
+            img-alt="Image"
+            img-top
+            tag="article"
+            style="max-width: 20rem;"
+            class="mb-2 h-100"
+          >
+            <b-card-text>
+              {{ user_male.age }}歳, {{ user_male.prefecture }}<br />
+              {{ user_male.self_status_message }} <br />
+              <!-- <hr />
             {{ user_male.self_introduction.slice(0, 50) }} -->
-          </b-card-text>
-          <!-- <b-button href="#" variant="primary">Go somewhere</b-button> -->
-        </b-card>
+            </b-card-text>
+            <!-- <b-button href="#" variant="primary">Go somewhere</b-button> -->
+          </b-card>
+        </nuxt-link>
       </div>
     </div>
   </div>
@@ -50,6 +55,9 @@ export default {
       // for (i = 0; i < int(users_male.length / 3); i++) {
       //   users_row = this.users_male_rows.append([i, i + 1, i + 2]);
       // }
+    },
+    gotoUserPage: function() {
+      console.log("hoge");
     }
   },
   created: function() {

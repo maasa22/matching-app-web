@@ -86,6 +86,14 @@ def male_users():
     #     users.append(User(**record))
     return df.to_json(orient="records")
 
+@app.route('/user/<user_id>', methods=['GET'])
+def single_user(user_id):
+    response_object = {'status': 'success'}
+    print(user_id)
+    conn = psycopg2.connect("postgresql://{}:{}@{}:{}/{}".format(user_db, password_db, host_db, port_db, database))
+    cur = conn.cursor()
+    df = pd.read_sql("SELECT * FROM user_web WHERE id_user = '{}'".format(user_id),  con=conn)
+    return df.to_json(orient="records")
 
 @app.route('/books', methods=['GET', 'POST'])
 def all_books():
