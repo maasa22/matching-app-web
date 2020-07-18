@@ -95,6 +95,25 @@ def single_user(user_id):
     df = pd.read_sql("SELECT * FROM user_web WHERE id_user = '{}'".format(user_id),  con=conn)
     return df.to_json(orient="records")
 
+@app.route('/user_by_conditions', methods=['GET', 'POST'])
+def user_by_conditions():
+    response_object = {'status': 'success'}
+    age_min = request.args.get('age_min')
+    age_max = request.args.get('age_max')
+    prefectures = request.args.getlist('prefecture[]')
+    conn = psycopg2.connect("postgresql://{}:{}@{}:{}/{}".format(user_db, password_db, host_db, port_db, database))
+    cur = conn.cursor()
+    if len(prefectures) >= 1:
+        prefectures_str = "("
+        for i in range(len(prefectures)):
+            prefectures_str += "'" + prefectures[i] + "', "
+            if i == len(prefectures) - 1:
+                prefectures_str += "'" + prefectures[i] + "')"
+        df = pd.read_sql("SELECT * FROM user_web WHERE age > '{}' and age < '{}' and prefecture in {}".format(age_min, age_max, prefectures_str),  con=conn)
+    else:
+        df = pd.read_sql("SELECT * FROM user_web WHERE age > '{}' and age < '{}'".format(age_min, age_max),  con=conn)
+    return df.to_json(orient="records")
+
 @app.route('/books', methods=['GET', 'POST'])
 def all_books():
     response_object = {'status': 'success'}

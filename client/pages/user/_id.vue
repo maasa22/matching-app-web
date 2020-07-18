@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <nuxt-link :to="{ path: '../search' }">
+      <b-button>一覧へ</b-button>
+    </nuxt-link>
     <div>
       <b-img
         :src="userProfile.self_images"

@@ -37,7 +37,7 @@ cur.execute("INSERT INTO user_web VALUES ('{}', '{}', '{}', '{}','{}', '{}', '{}
     'hoge',\
     'hoge@hoge',\
     datetime.date(1994, 11, 18),\
-    '東京', \
+    '東京都', \
     'ナオキ',\
     'よろしくお願いします',\
     'http://localhost:5000/static/image/test.png',\
@@ -52,7 +52,7 @@ cur.execute("INSERT INTO user_web VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{
     'fuga',\
     'fuga@fuga',\
     datetime.date(1994, 11, 17),\
-    '東京', \
+    '東京都', \
     'ハヤト',\
     'よろしくお願いします',\
     'http://localhost:5000/static/image/test.png',\
@@ -62,66 +62,22 @@ cur.execute("INSERT INTO user_web VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{
     datetime.datetime.now()\
 ))
 
-cur.execute("INSERT INTO user_web VALUES ('{}', '{}', '{}', '{}','{}', '{}', '{}', '{}','{}', '{}', '{}', '{}', '{}')".format( \
-    uuid.uuid4().hex,\
-    'male', \
-    'hoge',\
-    'hoge@hoge',\
-    datetime.date(1994, 11, 18),\
-    '東京', \
-    'ナオキ',\
-    'よろしくお願いします',\
-    'http://localhost:5000/static/image/test.png',\
-    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s...',\
-    25,\
-    48,\
-    datetime.datetime(2010, 2, 8, 1, 40, 27, 425337)\
-))
-cur.execute("INSERT INTO user_web VALUES ('{}', '{}', '{}', '{}','{}', '{}', '{}', '{}','{}', '{}', '{}', '{}', '{}')".format( \
-    uuid.uuid4().hex,\
-    'male', \
-    'hoge',\
-    'hoge@hoge',\
-    datetime.date(1994, 11, 18),\
-    '東京', \
-    'ナオキ',\
-    'よろしくお願いします',\
-    'http://localhost:5000/static/image/test.png',\
-    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s...',\
-    25,\
-    48,\
-    datetime.datetime(2010, 2, 8, 1, 40, 27, 425337)\
-))
-cur.execute("INSERT INTO user_web VALUES ('{}', '{}', '{}', '{}','{}', '{}', '{}', '{}','{}', '{}', '{}', '{}', '{}')".format( \
-    uuid.uuid4().hex,\
-    'male', \
-    'hoge',\
-    'hoge@hoge',\
-    datetime.date(1994, 11, 18),\
-    '東京', \
-    'ナオキ',\
-    'よろしくお願いします',\
-    'http://localhost:5000/static/image/test.png',\
-    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s...',\
-    25,\
-    48,\
-    datetime.datetime(2010, 2, 8, 1, 40, 27, 425337)\
-))
-cur.execute("INSERT INTO user_web VALUES ('{}', '{}', '{}', '{}','{}', '{}', '{}', '{}','{}', '{}', '{}', '{}', '{}')".format( \
-    uuid.uuid4().hex,\
-    'male', \
-    'hoge',\
-    'hoge@hoge',\
-    datetime.date(1994, 11, 18),\
-    '東京', \
-    'ナオキ',\
-    'よろしくお願いします',\
-    'http://localhost:5000/static/image/test.png',\
-    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s...',\
-    25,\
-    48,\
-    datetime.datetime(2010, 2, 8, 1, 40, 27, 425337)\
-))
+for i in range(5):
+    cur.execute("INSERT INTO user_web VALUES ('{}', '{}', '{}', '{}','{}', '{}', '{}', '{}','{}', '{}', '{}', '{}', '{}')".format( \
+        uuid.uuid4().hex,\
+        'male', \
+        'hoge',\
+        'hoge@hoge',\
+        datetime.date(1994, 11, 18),\
+        '東京都', \
+        'ナオキ',\
+        'よろしくお願いします',\
+        'http://localhost:5000/static/image/test.png',\
+        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s...',\
+        25,\
+        48,\
+        datetime.datetime(2010, 2, 8, 1, 40, 27, 425337)\
+    ))
 
 # cur.execute("INSERT INTO user_web VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}','{}', '{}', '{}', '{}', '{}')".format( \
 #     uuid.uuid4().hex,\

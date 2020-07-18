@@ -1,18 +1,17 @@
 <template>
   <div class="container">
     <h1>さがす</h1>
-    <p>12345 人</p>
-    <p>(右に検索アイコン)</p>
+    <p class="box">12345 人</p>
+    <nuxt-link :to="{ path: 'search_by_conditions' }">
+      <b-button class="box">検索</b-button>
+    </nuxt-link>
     <div class="row">
       <div
         v-for="(user_male, index) in users_male"
         :key="index"
         class="col-md-3 col-6 my-1"
       >
-        <nuxt-link
-          @click.native="gotoUserPage"
-          :to="{ path: 'user/' + user_male.id_user }"
-        >
+        <nuxt-link :to="{ path: 'user/' + user_male.id_user }">
           <b-card
             :title="user_male.display_name"
             :img-src="user_male.self_images"
@@ -55,9 +54,6 @@ export default {
       // for (i = 0; i < int(users_male.length / 3); i++) {
       //   users_row = this.users_male_rows.append([i, i + 1, i + 2]);
       // }
-    },
-    gotoUserPage: function() {
-      console.log("hoge");
     }
   },
   created: function() {
@@ -65,3 +61,9 @@ export default {
   }
 };
 </script>
+<style scoped>
+.box {
+  display: inline-block;
+  width: 100px;
+}
+</style>
