@@ -196,13 +196,13 @@ def login():
         print("no user with entered email")
         return jsonify({
             "status": "failed",
-            "message": "username is wrong"
+            "message": "username is wrong!"
         }), 401 #401
     if not check_password_hash(df['password'][0], password):
         print("login2")
         return jsonify({
             "status": "failed",
-            "message": "password is wrong"
+            "message": "password is wrong!"
         }), 401
 
     # Generate a token

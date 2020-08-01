@@ -19,6 +19,9 @@
     <b-button v-on:click="login" variant="primary" class="btn-block"
       >Log me in</b-button
     >
+    <div class="login_status_msg_container">
+      <p class="login_status_msg">{{ login_status_message }}</p>
+    </div>
   </div>
 </template>
 
@@ -32,41 +35,36 @@ export default {
       mail: "",
       password: "",
       api_url: process.env.BASE_URL,
-      proccessing: false
+      proccessing: false,
+      login_status_message: ""
     };
   },
   methods: {
     login: async function() {
-      let res = await axios.post(this.api_url + "api/login", {
-        // params: {
-        mail: this.mail,
-        password: this.password
-        // }
-      });
-      console.log(res);
+      axios
+        .post(this.api_url + "api/login", {
+          mail: this.mail,
+          password: this.password
+        })
+        .then(response => {
+          console.log("Everything is awesome.");
+          console.log(response);
+        })
+        .catch(error => {
+          console.warn("Not good man :(");
+          this.login_status_message = error.response.data.message;
+        });
+
+      // let res = await axios.post(this.api_url + "api/login", {
+      //   // params: {
+      //   mail: this.mail,
+      //   password: this.password
+      //   // }
+      // });
+      // console.log(res);
     }
   }
 };
-
-// let res = await axios.post(this.api_url + "user_by_conditions", {
-//   headers: {
-//     "Content-Type": "application/json;charset=utf-8",
-//     "Access-Control-Allow-Origin": "*"
-//   },
-//   params: {
-//     age_min: 17,
-//     age_max: 31,
-//     prefectures: ""
-//   }
-// });
-// console.log(res);
-// let res = await axios.post("api/login", {
-// headers: {
-//   "Content-Type": "application/json;charset=utf-8",
-//   "Access-Control-Allow-Origin": "*",
-//   "Access-Control-Allow-Methods":
-//     "GET, POST, PUT, POST, DELETE, OPTIONS"
-// },
 </script>
 
 <style scoped>
@@ -80,5 +78,14 @@ export default {
 }
 .input-form {
   margin-bottom: 9px;
+}
+.login_status_msg_container {
+  height: 30px;
+}
+.login_status_msg {
+  margin: auto;
+  text-align: center;
+  margin-top: 10px;
+  color: #ff0000;
 }
 </style>
