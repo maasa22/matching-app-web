@@ -37,12 +37,9 @@
 
 <script>
 import axios from "axios";
-// import searchByConditionsF from "~/components/pages_each_customers/searchByConditionsF.vue";
 
 export default {
-  // components: {
-  //   searchByConditionsF
-  // },
+  components: {},
   props: {
     age_min: Number,
     age_max: Number,

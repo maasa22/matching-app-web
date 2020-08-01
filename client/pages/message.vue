@@ -1,15 +1,16 @@
 <template>
   <div>
+    <Navbar />
     <message-f />
   </div>
 </template>
 <script>
-import message_f from "~/components/pages_each_customers/message_f.vue";
-// import message_m from "~/components/pages_each_customers/message_m.vue";
+import messageF from "~/components/pages_each_customers/messageF.vue";
+// import messageM from "~/components/pages_each_customers/messageM.vue";
 export default {
   components: {
-    message_f
-    // message_m
+    messageF
+    // messageM
   }
 };
 </script>

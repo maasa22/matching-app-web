@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Navbar />
     <search-f
       :age_min="age_min"
       :age_max="age_max"
@@ -10,9 +11,12 @@
 <script>
 import searchF from "~/components/pages_each_customers/searchF.vue";
 // import search_m from "~/components/pages_each_customers/searchM.vue";
+import Navbar from "~/components/Navbar.vue";
+
 export default {
   components: {
-    searchF
+    searchF,
+    Navbar
     // searchM
   },
   data() {
