@@ -1,11 +1,19 @@
 import uuid
+import datetime
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask import send_from_directory
+from flask import session
 import pandas as pd
 import config
 import psycopg2
 import json
+from flask_jwt_extended import (
+        JWTManager, jwt_required, create_access_token,
+        get_jwt_identity
+    )
+from werkzeug.security import generate_password_hash, check_password_hash
+
 
 user_db = config.user_db
 password_db = config.password_db
@@ -54,10 +62,12 @@ DEBUG = True
 # instantiate the app
 app = Flask(__name__)
 app.config.from_object(__name__)
+app.config['JWT_SECRET_KEY'] = 'something-super-secrettttttttt'  # Change this!
+jwt = JWTManager(app)
 
 # enable CORS
 CORS(app, resources={r'/*': {'origins': '*'}})
-
+# CORS(app)
 
 def remove_book(book_id):
     for book in BOOKS:
@@ -81,6 +91,8 @@ def male_users():
     conn = psycopg2.connect("postgresql://{}:{}@{}:{}/{}".format(user_db, password_db, host_db, port_db, database))
     cur = conn.cursor()
     df = pd.read_sql("SELECT * FROM user_web WHERE gender = 'male'", con=conn)
+    cur.close()
+    conn.close()
     # users = []
     # for record in json.loads(df.to_json(orient="records")):
     #     users.append(User(**record))
@@ -93,6 +105,8 @@ def single_user(user_id):
     conn = psycopg2.connect("postgresql://{}:{}@{}:{}/{}".format(user_db, password_db, host_db, port_db, database))
     cur = conn.cursor()
     df = pd.read_sql("SELECT * FROM user_web WHERE id_user = '{}'".format(user_id),  con=conn)
+    cur.close()
+    conn.close()
     return df.to_json(orient="records")
 
 @app.route('/user_by_conditions', methods=['GET', 'POST'])
@@ -112,7 +126,99 @@ def user_by_conditions():
         df = pd.read_sql("SELECT * FROM user_web WHERE age >= '{}' and age <= '{}' and prefecture in {}".format(age_min, age_max, prefectures_str),  con=conn)
     else:
         df = pd.read_sql("SELECT * FROM user_web WHERE age >= '{}' and age <= '{}'".format(age_min, age_max),  con=conn)
+    cur.close()
+    conn.close()
     return df.to_json(orient="records")
+
+
+@app.route('/register', methods=["POST"])
+def register():
+    print("1")
+    mail = request.form['mail']
+    password = generate_password_hash(request.form['password'])
+
+    conn = psycopg2.connect("postgresql://{}:{}@{}:{}/{}".format(user_db,
+    password_db, host_db, port_db, database))
+    cur = conn.cursor()
+
+    df = pd.read_sql("SELECT * FROM user_web WHERE mail = '{}'".format(mail), con=conn)
+    print("2")
+
+    if len(df) == 0:
+        print("3")
+        cur.execute("INSERT INTO user_web VALUES ('{}', '{}', '{}', '{}','{}', '{}', '{}', '{}','{}', '{}', '{}', '{}', '{}')".format( \
+            uuid.uuid4().hex,\
+            '', \
+            password,\
+            mail,\
+            datetime.date(2000, 1, 1),\
+            '', \
+            '',\
+            '',\
+            'http://localhost:5000/static/image/test.png',\
+            '',\
+            20,\
+            0,\
+            datetime.datetime(2010, 2, 8, 1, 40, 27, 425337)\
+        ))
+        cur.close()
+        conn.commit()
+        conn.close()
+        return jsonify({
+            "status": "success",
+            "message": "User added successfully"
+        }), 201
+    else:
+        print("4")
+        return jsonify({
+            "status": "failed",
+            "message": "email is already registered "
+        }), 401
+
+
+# https://flask-jwt-extended.readthedocs.io/en/stable/basic_usage/　を参考にしましょい！！
+@app.route('/api/login', methods=["POST"])
+def login():
+    mail = request.get_json()['mail']
+    password = request.get_json()['password']
+    conn = psycopg2.connect("postgresql://{}:{}@{}:{}/{}".format(user_db,
+    password_db, host_db, port_db, database))
+    cur = conn.cursor()
+    df = pd.read_sql("SELECT * FROM user_web WHERE mail = '{}'".format(mail), con=conn)
+    cur.close()
+    conn.close()
+    # user = User.query.filter_by(username=username).first()
+    print(len(df))
+    print(mail, password)
+    # print(df['password'][0])
+    # if not exists
+    if len(df) == 0:
+        print("no user with entered email")
+        return jsonify({
+            "status": "failed",
+            "message": "username is wrong"
+        }), 401 #401
+    if not check_password_hash(df['password'][0], password):
+        print("login2")
+        return jsonify({
+            "status": "failed",
+            "message": "password is wrong"
+        }), 401
+
+    # Generate a token
+    access_token = create_access_token(identity=mail)
+
+    print("login3")
+    return jsonify({
+        "status": "success",
+        "message": "login successful",
+        "data": {
+            # "id": user.id,
+            "token": access_token,
+            "mail": mail
+        }
+    }), 200
+
 
 @app.route('/books', methods=['GET', 'POST'])
 def all_books():

@@ -2,6 +2,7 @@ import uuid
 import config
 import psycopg2
 import datetime
+from werkzeug.security import generate_password_hash, check_password_hash
 
 user = config.user
 password = config.password
@@ -34,7 +35,7 @@ cur.execute('''CREATE TABLE user_web \
 cur.execute("INSERT INTO user_web VALUES ('{}', '{}', '{}', '{}','{}', '{}', '{}', '{}','{}', '{}', '{}', '{}', '{}')".format( \
     uuid.uuid4().hex,\
     'male', \
-    'hoge',\
+    generate_password_hash('hoge'),\
     'hoge@hoge',\
     datetime.date(1994, 11, 18),\
     '東京都', \
@@ -49,7 +50,7 @@ cur.execute("INSERT INTO user_web VALUES ('{}', '{}', '{}', '{}','{}', '{}', '{}
 cur.execute("INSERT INTO user_web VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}','{}', '{}', '{}', '{}', '{}')".format( \
     uuid.uuid4().hex,\
     'male', \
-    'fuga',\
+    generate_password_hash('fuga'),\
     'fuga@fuga',\
     datetime.date(1994, 11, 17),\
     '東京都', \
@@ -62,12 +63,13 @@ cur.execute("INSERT INTO user_web VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{
     datetime.datetime.now()\
 ))
 
+mail_list = ["a@a", "b@b", "c@c", "d@d", "e@e"]
 for i in range(5):
     cur.execute("INSERT INTO user_web VALUES ('{}', '{}', '{}', '{}','{}', '{}', '{}', '{}','{}', '{}', '{}', '{}', '{}')".format( \
         uuid.uuid4().hex,\
         'male', \
-        'hoge',\
-        'hoge@hoge',\
+        generate_password_hash('hoge'),\
+        mail_list[i],\
         datetime.date(1994, 11, 18),\
         '埼玉県', \
         'ナオキ',\

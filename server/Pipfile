@@ -10,6 +10,7 @@ flask = "*"
 flask-cors = "*"
 psycopy2-binary = "*"
 pandas = "*"
+flask-jwt-extended = "*"
 
 [requires]
 python_version = "3.7"
