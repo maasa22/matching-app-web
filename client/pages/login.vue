@@ -4,12 +4,12 @@
   </div>
 </template>
 <script>
-import login_f from "~/components/pages_each_customers/login_f.vue";
-// import login_m from "~/components/pages_each_customers/login_m.vue";
+import loginF from "~/components/pages_each_customers/loginF.vue";
+// import loginM from "~/components/pages_each_customers/loginM.vue";
 export default {
   components: {
-    login_f
-    // login_m
+    loginF
+    // loginM
   }
 };
 </script>

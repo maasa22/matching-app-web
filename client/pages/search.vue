@@ -8,12 +8,12 @@
   </div>
 </template>
 <script>
-import search_f from "~/components/pages_each_customers/search_f.vue";
-// import search_m from "~/components/pages_each_customers/search_m.vue";
+import searchF from "~/components/pages_each_customers/searchF.vue";
+// import search_m from "~/components/pages_each_customers/searchM.vue";
 export default {
   components: {
-    search_f
-    // search_m
+    searchF
+    // searchM
   },
   data() {
     return {

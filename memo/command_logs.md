@@ -42,7 +42,6 @@
   - nuxt-link、params でやり取りができなかったが query でやり取りはできた。謎。
   - 最悪、ページ間のデータのやり取りが難しいいなら、:show で見えるか見えないかを制御して 1 ファイルにしてしまうのもあり。
   - 検索条件は、毎回リセットされると不便なので、db に入れちゃった方が良い説はある。
-
-### issues
-
-- localhost:5000 を global 変数に入れる。
+- set base_url with .env
+- create login, register
+- will create login_required, logout

@@ -131,16 +131,14 @@ def user_by_conditions():
     return df.to_json(orient="records")
 
 
-@app.route('/register', methods=["POST"])
+@app.route('/api/register', methods=["POST"])
 def register():
-    print("1")
-    mail = request.form['mail']
-    password = generate_password_hash(request.form['password'])
+    mail = request.get_json()['mail']
+    password = request.get_json()['password']
 
     conn = psycopg2.connect("postgresql://{}:{}@{}:{}/{}".format(user_db,
     password_db, host_db, port_db, database))
     cur = conn.cursor()
-
     df = pd.read_sql("SELECT * FROM user_web WHERE mail = '{}'".format(mail), con=conn)
     print("2")
 
